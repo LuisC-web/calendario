@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter,Routes,Route } from "react-router-dom";
+import Error404 from "./components/Error404";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./pages/Home";
@@ -17,6 +18,8 @@ function App() {
 				<Route>
 					<Route path="/home" element={<Home></Home>}></Route>
 				</Route>
+				<Route path="*" element={<Error404></Error404>}>
+				</Route> 
 			</Routes>
 		</BrowserRouter>
 	);

@@ -3,6 +3,7 @@ import {valide} from "../../global/global";
 import {useNavigate} from "react-router-dom";
 import { auth } from "../firebase/credenciales";
 import {  createUserWithEmailAndPassword } from "firebase/auth";
+import { Info } from "@mui/icons-material";
 
 
 function Register() {
@@ -20,12 +21,15 @@ function Register() {
 					// Signed in 
 					const user = userCredential.user;
 					navigate("/home");
+					console.info(user);
 					// ...
 				})
 				.catch((error) => {
 					const errorCode = error.code;
 					const errorMessage = error.message;
 					// ..
+					console.error(errorCode, errorMessage);
+    
 				});
 
 		}
@@ -64,6 +68,7 @@ function Register() {
 				</div>
 
 				<button className='w-full bg-white p-2 mt-3 rounded-lg' type='submit' onClick={e=>registerUser(e)} value="register">Registrar</button>
+				<p className=" text-center mt-2 font-semibold">O</p>
 				<button className='w-full bg-white p-2 mt-3 rounded-lg'  onClick={()=>navigate("/")} value="login">Loguearse</button>
 
 
