@@ -1,5 +1,7 @@
+/* eslint-disable react/prop-types */
 import React, { useContext, useEffect, useState } from "react";
 import ContextoDelCalendario from "../ProviderDelCalendario";
+
 function AgregarEvento({ agregarEventos, setAgregarEventos }) {
 	const { diaSelecionado, dispatchEventos, eventoSelecionado,setEventoSelecionado } = useContext(
 		ContextoDelCalendario

@@ -16,16 +16,16 @@ const ContextoDelCalendario=createContext(
 
 
 );
-function guardarEventosReducer(state,{type,payload}){
+function guardarEventosReducer(state: any[],{type,payload}: any){
 	switch (type) {
 	case "push":
 		return [...state,payload];
   
 		break;
 	case "update":
-		return state.map(evento=>evento.id===payload.id?payload:evento);
+		return state.map((evento: { id: unknown; })=>evento.id===payload.id?payload:evento);
 	case "delete":
-  		return state.filter(evento=>evento.id!=payload.id);
+		return state.filter((evento: { id: unknown; })=>evento.id!=payload.id);
 
 	default:
 		throw new Error();
@@ -39,7 +39,8 @@ function inicializarEventos(){
 	return parsearEventos;
 }
 
-const ProviderDelCalendario = ({children}) => {
+// eslint-disable-next-line react/prop-types
+const ProviderDelCalendario = ({children}): JSX.Element => {
 	const [mes, setMes] = useState(dayjs().month());
 	const [calendarioPequenio,setCalendarioPequenio]=useState(null);
 	const [diaSelecionado,setdiaSelecionado]=useState(dayjs());
