@@ -50,7 +50,8 @@ function Login () {
 		<form className='bg-color-second md:w-1/4 p-4 rounded-md shadow-lg bg-opacity-50'>
 			{error?(<ErrorF error={error}></ErrorF>):null}
 			<div className='flex flex-col mt-2'>
-				<label htmlFor="mail">Correo</label>
+				<h1 className="font-bold text-center uppercase">Iniciar sesión</h1>
+  		<label htmlFor="mail">Correo</label>
 				<input className="mt-2 rounded-lg p-2" type="email" name="mail" id="mail"  value={email}
 					onChange={e=>setEmail(e.target.value)}
 					autoFocus/>

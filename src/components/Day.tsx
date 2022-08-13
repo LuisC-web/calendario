@@ -1,9 +1,22 @@
 import dayjs from "dayjs";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ContextoDelCalendario from "../ProviderDelCalendario";
 
 function Day({day,rowIndex}) {
-	const {setAgregarEventos,diaSelecionado,setdiaSelecionado}=useContext(ContextoDelCalendario);
+	const [dayEvents,setDayEvents]=useState([]);
+
+	const {setAgregarEventos,diaSelecionado,setdiaSelecionado,guardarEventos,setEventoSelecionado}=useContext(ContextoDelCalendario);
+
+
+	useEffect(() => {
+		const eventos=guardarEventos.filter(evento=>(
+			dayjs(evento.day).format("DD-MM-YY")===day.format("DD-MM-YY"))
+  
+		);
+		
+		setDayEvents(eventos);
+  
+	}, [guardarEventos,day]);
 	const getCurrentDay = ()=>{
 		const formato="DD-MM-YY";
 		const diaHoy= dayjs().format(formato);
@@ -20,7 +33,7 @@ function Day({day,rowIndex}) {
 
   
 	};
-
+	
 	return (
 		<div className="border border-gray cursor-pointer">
 			<header className="flex flex-col items-center">
@@ -37,7 +50,21 @@ function Day({day,rowIndex}) {
 				</p>
 
     
+				{dayEvents.map((evento,indice)=>(
+
+					<div	className="bg-color-base w-3/4 text-center p-1 text-white rounded-lg" 
+						onClick={()=>{setEventoSelecionado(evento);
+							setAgregarEventos(true);
+						}}
+						key={indice}
+						id={indice}
+					>
+						{evento.titulo}
+					</div>
+
+				))}
 			</header>
+
 
 		</div>
 	);

@@ -42,7 +42,6 @@ const time =(month= dayjs().month())=>
   
 	});
  
-	console.log(daysMatrix);
 	return daysMatrix;
 };
 
