@@ -7,7 +7,7 @@ import es from "dayjs/locale/es";
 dayjs.locale(es);
 const valide =
 //Validando correo
-(mail:string, password:string):boolean => {
+(mail:string, password:string):boolean|string => {
 	if (/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(mail)) {
 		/*Validando Contraseña 
   Requisitos:
@@ -20,9 +20,11 @@ const valide =
 			console.log("Rigth!");
 			return true;
 		}
+		else{
+			return "Debe tener una mayúscula, minuscula, número y caracter especial";
+		}
 	}
-	console.log("incorrect");
-	return false;
+	return "El correo es inválido";
 };
 //obtener tiempo
 

@@ -8,7 +8,7 @@ function Day({day,rowIndex}) {
 	};
 
 	return (
-		<div className="border border-gray cursor-pointer">
+		<div className="border cursor-pointer">
 			<header className="flex flex-col items-center">
 				{rowIndex===0&&	(<p className="text-sm mt-1">
 					{day.format("ddd").toUpperCase()}

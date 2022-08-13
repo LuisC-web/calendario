@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import { auth } from "../firebase/credenciales";
 import {  createUserWithEmailAndPassword } from "firebase/auth";
 import { Info } from "@mui/icons-material";
+import ErrorF from "./ErrorF";
 
 
 function Register() {
@@ -11,11 +12,13 @@ function Register() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [repeatPassword, setRepeatPassword] = useState("");
+ 	const [error,setError]=useState("");
+
 	const registerUser = (e:any) =>{
 		e.preventDefault();	
+		const validacion: boolean|string=valide(email, password);
 
-
-		if (valide(email, password)) {
+		if (valide(email, password)===true&&password===repeatPassword) {
 			createUserWithEmailAndPassword(auth, email, password)
 				.then((userCredential) => {
 					// Signed in 
@@ -33,7 +36,11 @@ function Register() {
 				});
 
 		}
- 
+		else if(validacion.length >0){
+   			setError(validacion);
+		}	else {
+			setError("Constraseña no coinciden");
+		}
 
 
 	};
@@ -42,7 +49,7 @@ function Register() {
 		<div className="bg-color-base w-screen h-screen flex justify-center items-center ">
 
 			<form className='bg-color-second md:w-1/4 p-4 rounded-md shadow-lg bg-opacity-50'>
-
+				{error?(<ErrorF error={error}></ErrorF>):null}
 				<div className='flex flex-col mt-2'>
 					<label htmlFor="mail">Correo</label>
 					<input className="mt-2 rounded-lg p-2" type="email" name="mail" id="mail"  value={email}
