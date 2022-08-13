@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import { valide } from "../../global/global";
 import { auth } from "../firebase/credenciales";
 import ErrorF from "./ErrorF";
-import Input from "./Input";
+
 
 function Login () {
 	const navigate=useNavigate();

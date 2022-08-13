@@ -46,5 +46,10 @@ const time =(month= dayjs().month())=>
 	return daysMatrix;
 };
 
+const colors= {
+	"red":"red",
 
-export { valide,time};
+
+
+};
+export { valide,time,colors};

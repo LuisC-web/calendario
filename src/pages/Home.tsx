@@ -20,7 +20,7 @@ export default function Home() {
 	
 
 
-		<div className="h-screen grid grid-cols-4 ">
+		<div className="h-screen grid grid-cols-4">
 
 			<CalendarHeader/>
 			<div className="order-first col-start-1 col-end-4 flex flex-col flex-1  m-5 ">

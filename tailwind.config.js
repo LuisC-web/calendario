@@ -10,6 +10,7 @@ module.exports = {
 			"color-second": "#fff"
 			, "color-text":"#000",
 			"white":"#fff",
+			"blue-light":"#87bbe6",
 			"gray":"#222",
 			"red":"#D9230F "
 		
