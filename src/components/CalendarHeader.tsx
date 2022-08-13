@@ -2,21 +2,20 @@ import React, { useContext } from "react";
 import calendar from "../assets/calendar.svg";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import GlobalContext from "../GlobalContext";
+import ContextoDelCalendario from "../ProviderDelCalendario";
 function CalendarHeader() {
-	const {monthIndex,setMonthIndex}=useContext(GlobalContext);
-	const aumentarMes=()=>{
-
-		setMonthIndex(monthIndex+1);
-
-	};
+	const {mes,setMes}=useContext(ContextoDelCalendario);
 	const disminuirMes=()=>{
 
-		setMonthIndex(monthIndex-1);
-
+		setMes(mes-1);
 	};
+	const aumentarMes=()=>{
+
+		setMes(mes+1);
+	};
+
 	return (
-		<header className="flex items-center">
+		<header className="flex flex-col justify-center items-center">
 			<img src={calendar} alt="calendar" className="mr-2 w-12 h-12">
 
 			</img>
@@ -24,13 +23,17 @@ function CalendarHeader() {
 
     Calendario
 			</h1>
-			<button className="border rounded py-2 px-4">Hoy</button>
-			<button><span className="material-icons-outlined cursor-pointer text-gray mx">
-				<ChevronLeftIcon onClick={()=>disminuirMes()}></ChevronLeftIcon>
-			</span></button>
-			<button><span className="material-icons-outlined cursor-pointer text-gray mx">
-				<ChevronRightIcon onClick={()=>aumentarMes()}></ChevronRightIcon>
-			</span></button>
+			
+			<div>
+				<button className="border rounded py-2 px-4">Hoy</button>
+				<button><span className="material-icons-outlined cursor-pointer text-gray mx">
+					<ChevronLeftIcon onClick={()=>disminuirMes()}></ChevronLeftIcon>
+				</span></button>
+				<button><span className="material-icons-outlined cursor-pointer text-gray mx">
+					<ChevronRightIcon onClick={()=>aumentarMes()}></ChevronRightIcon>
+				</span></button>
+			</div>
+			<h1>Hello</h1>
 		</header>
 
 	);
