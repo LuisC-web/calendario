@@ -1,10 +1,14 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import calendar from "../assets/calendar.svg";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ContextoDelCalendario from "../ProviderDelCalendario";
+import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
+import AgregarEvento from "./AgregarEvento";
+import dayjs from "dayjs";
+import CalendarioPequenio from "./CalendarioPequenio";
 function CalendarHeader() {
-	const {mes,setMes}=useContext(ContextoDelCalendario);
+	const {mes,setMes,setAgregarEventos,agregarEventos}=useContext(ContextoDelCalendario);
 	const disminuirMes=()=>{
 
 		setMes(mes-1);
@@ -13,19 +17,18 @@ function CalendarHeader() {
 
 		setMes(mes+1);
 	};
+	const resetearCalendario=()=>{
+		console.log(dayjs().month());
+
+		setMes(dayjs().month());
+
+	};
 
 	return (
-		<header className="flex flex-col justify-center items-center">
-			<img src={calendar} alt="calendar" className="mr-2 w-12 h-12">
-
-			</img>
-			<h1 className="mr-10 text-xl text-gray fond-bold">
-
-    Calendario
-			</h1>
-			
-			<div>
-				<button className="border rounded py-2 px-4">Hoy</button>
+		<header className="flex flex-col justify-center items-center ">
+			<CalendarioPequenio></CalendarioPequenio>
+			<div className="mb-3">
+				<button onClick={()=>resetearCalendario()} className="border rounded py-2 px-4">Hoy</button>
 				<button><span className="material-icons-outlined cursor-pointer text-gray mx">
 					<ChevronLeftIcon onClick={()=>disminuirMes()}></ChevronLeftIcon>
 				</span></button>
@@ -33,10 +36,18 @@ function CalendarHeader() {
 					<ChevronRightIcon onClick={()=>aumentarMes()}></ChevronRightIcon>
 				</span></button>
 			</div>
-			<h1>Hello</h1>
+			<button onClick={()=>setAgregarEventos(!agregarEventos)} className="bg-color-base p-2 
+   rounded-lg">Agregar eventos</button>
+	
+			<AgregarEvento agregarEventos={agregarEventos} setAgregarEventos={setAgregarEventos} ></AgregarEvento>
+	
 		</header>
 
 	);
 }
 
 export default CalendarHeader;
+
+function days() {
+	throw new Error("Function not implemented.");
+}
