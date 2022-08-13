@@ -1,20 +1,31 @@
 import dayjs from "dayjs";
 import React, { createContext, useEffect, useReducer, useState } from "react";
-
+interface State{
+	titulo: string,
+			descripcion: string,
+			label:string,
+			day:number,
+			id:number
+}
 
 const ContextoDelCalendario=createContext(
+	{
+
+  
+	}
+
 
 );
-function guardarEventosReducer(state,{type,payload}){
+function guardarEventosReducer(state: any[],{type,payload}: any){
 	switch (type) {
 	case "push":
 		return [...state,payload];
   
 		break;
 	case "update":
-		return state.map(evento=>evento.id===payload?payload:evt);
+		return state.map((evento: { id: unknown; })=>evento.id===payload.id?payload:evento);
 	case "delete":
-  		return state.filter(evento=>evento.id!=payload);
+		return state.filter((evento: { id: unknown; })=>evento.id!=payload.id);
 
 	default:
 		throw new Error();
@@ -23,17 +34,20 @@ function guardarEventosReducer(state,{type,payload}){
 }
 function inicializarEventos(){
 
-	const storageEvents= localStorage.getItem("elementosGuardados");
+	const storageEvents= localStorage.getItem("elementosGuardados")||"";
 	const parsearEventos= !storageEvents?JSON.parse(storageEvents):[];
 	return parsearEventos;
 }
 
-const ProviderDelCalendario = ({children}) => {
+// eslint-disable-next-line react/prop-types
+const ProviderDelCalendario = ({children}): JSX.Element => {
 	const [mes, setMes] = useState(dayjs().month());
 	const [calendarioPequenio,setCalendarioPequenio]=useState(null);
 	const [diaSelecionado,setdiaSelecionado]=useState(dayjs());
- 	const [agregarEventos,setAgregarEventos]=useState(false);
+	const [agregarEventos,setAgregarEventos]=useState(false);
 	const [guardarEventos, dispatchEventos]=useReducer(guardarEventosReducer,[],inicializarEventos);
+
+	const [eventoSelecionado,setEventoSelecionado]=useState(null);
 
 	useEffect(()=>{
 		if(calendarioPequenio!==null){
@@ -52,7 +66,7 @@ const ProviderDelCalendario = ({children}) => {
 	return (
 
 		<ContextoDelCalendario.Provider
-			value={{mes,setMes,calendarioPequenio,setCalendarioPequenio,diaSelecionado,setdiaSelecionado,agregarEventos,setAgregarEventos,dispatchEventos}}
+			value={{mes,setMes,calendarioPequenio,setCalendarioPequenio,diaSelecionado,setdiaSelecionado,agregarEventos,setAgregarEventos,dispatchEventos,guardarEventos,eventoSelecionado,setEventoSelecionado}}
   
 		>
 			{children}
