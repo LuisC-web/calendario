@@ -2,7 +2,7 @@ import React from "react";
 import Day from "./Day";
 function Month({currentMonth}) {
 	return (
-		<div className="flex-1 grid grid-cols-7  ">
+		<div className=" flex-1 grid grid-cols-7  ">
 			{
 				currentMonth.map(
 					(row,i)=>(
